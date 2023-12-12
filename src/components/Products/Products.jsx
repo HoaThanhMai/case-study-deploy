@@ -5,12 +5,12 @@ import { remainProducts, loadingSelector } from "../../redux-toolkit/selectors";
 import { fetchProductThunkAction } from "../../slices/productsSlice";
 
 function Products() {
-    const dispatch = useDispatch()
-    const loading = useSelector(loadingSelector)
+    const dispatch = useDispatch();
+    const loading = useSelector(loadingSelector);
     useEffect(() => {
-        dispatch(fetchProductThunkAction())
-    }, [dispatch])
-    const remainProductList = useSelector(remainProducts)
+        dispatch(fetchProductThunkAction());
+    }, [dispatch]);
+    const remainProductList = useSelector(remainProducts);
     // const productList = useSelector((state) => state.productList)
     // const { searchText, price, color, category, recommended } = useSelector((state) => state.filters)
     // const queryProducts = () => {
@@ -43,19 +43,17 @@ function Products() {
     return (
         <div className="py-2 d-flex flex-column justify-content-center">
             <h5>Products</h5>
-            {
-                loading === 'loading' ? <p>Loading ...</p> : (
-                    <div className="row">
-                        {
-                            remainProductList?.map((product) => (
-                                <Product key={product.id} product={product} />
-                            ))
-                        }
-                    </div>
-                )
-            }
+            {loading === "loading" ? (
+                <p>Loading ...</p>
+            ) : (
+                <div className="row">
+                    {remainProductList?.map((product) => (
+                        <Product key={product.id} product={product} />
+                    ))}
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default Products;

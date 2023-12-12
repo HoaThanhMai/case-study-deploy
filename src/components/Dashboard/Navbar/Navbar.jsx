@@ -6,18 +6,20 @@ import { Link } from "react-router-dom";
 function Navbar() {
     return (
         <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
-            <div style={{ minWidth: '180px' }} className="d-flex align-items-center">
-                <Link to={'/dashboard/order-list'} className="logo">
+            <div
+                style={{ minWidth: "180px" }}
+                className="d-flex align-items-center">
+                <Link to={"/dashboard/order-list"} className="logo">
                     <FaCartPlus size={22} className="me-2" /> Dashoard
                 </Link>
             </div>
             <div>
-                <Link to={'/shoe'}>
-                    Khoa Nguyễn <PiSignOut />
+                <Link to={"/shoe"}>
+                    Hoa Mai Thanh <PiSignOut />
                 </Link>
             </div>
         </div>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

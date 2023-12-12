@@ -7,7 +7,7 @@ function OrderManagementPage() {
         <DashboardLayout>
             <OrderList />
         </DashboardLayout>
-    )
+    );
 }
 
 export default OrderManagementPage;

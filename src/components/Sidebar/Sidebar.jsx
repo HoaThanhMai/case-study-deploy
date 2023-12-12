@@ -1,6 +1,6 @@
 import React from "react";
-import Category from './Category';
-import Price from './Price';
+import Category from "./Category";
+import Price from "./Price";
 import Colors from "./Colors";
 import { FaCartPlus } from "react-icons/fa";
 function Sidebar() {
@@ -10,7 +10,7 @@ function Sidebar() {
             <Price />
             <Colors />
         </div>
-    )
+    );
 }
 
 export default Sidebar;

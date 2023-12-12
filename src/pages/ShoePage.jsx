@@ -7,17 +7,17 @@ import MainLayout from "../layouts/MainLayout";
 function ShoePage() {
     return (
         <MainLayout>
-            <div className='container d-flex'>
+            <div className="container d-flex">
                 <div style={{ minWidth: "180px" }}>
                     <Sidebar />
                 </div>
-                <div className='flex-grow-1'>
+                <div className="flex-grow-1">
                     <Recommended />
                     <Products />
                 </div>
             </div>
         </MainLayout>
-    )
+    );
 }
 
-export default ShoePage
+export default ShoePage;
