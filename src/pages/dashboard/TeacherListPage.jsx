@@ -1,11 +1,11 @@
 import React from "react";
-import DashBoardLayout from "../../layouts/DashBoardLayout";
+import DashboardLayout from "../../layouts/DashboardLayout";
 
 function TeacherListPage() {
     return (
-        <DashBoardLayout>
+        <DashboardLayout>
             <div className="container-fluid d-flex"></div>
-        </DashBoardLayout>
+        </DashboardLayout>
     );
 }
 

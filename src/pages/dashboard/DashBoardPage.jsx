@@ -1,12 +1,12 @@
 import React from "react";
-import DashBoardLayout from "../../layouts/DashBoardLayout";
+import DashboardLayout from "../../layouts/DashboardLayout";
 
-function DashBoardPage() {
+function DashboardPage() {
     return (
-        <DashBoardLayout>
+        <DashboardLayout>
             <div className="container-fluid d-flex"></div>
-        </DashBoardLayout>
+        </DashboardLayout>
     );
 }
 
-export default DashBoardPage;
+export default DashboardPage;

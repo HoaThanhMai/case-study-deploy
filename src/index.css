@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400;1,500&display=swap");
+
+html,
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
@@ -8,4 +10,17 @@ body {
 
 code {
     font-family: "Poppins", sans-serif;
+}
+
+/* css for logo class at NavBar */
+.logo {
+    text-decoration: none;
+    color: #212529;
+}
+
+/* css for menu class at Dashboard Menu */
+.menu {
+    margin-bottom: 1px;
+    padding: 7px 2px;
+    text-decoration: none;
 }

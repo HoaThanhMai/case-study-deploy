@@ -1,7 +1,7 @@
 import React from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 
-function ClassListPage() {
+function StudentListPage() {
     return (
         <DashboardLayout>
             <div className="container-fluid d-flex"></div>
@@ -9,4 +9,4 @@ function ClassListPage() {
     );
 }
 
-export default ClassListPage;
+export default StudentListPage;

@@ -1,13 +1,13 @@
 import React from "react";
 import NavBar from "../components/NavBar/NavBar";
-import Menu from "../components/DashBoard/Menu";
+import Menu from "../components/Dashboard/Menu";
 
-function DashBoardLayout({ children }) {
+function DashboardLayout({ children }) {
     return (
         <div className="container">
             <NavBar />
-            <div className="d-flex">
-                <div>
+            <div className="d-flex py-2">
+                <div style={{ minWidth: "180px" }}>
                     <Menu />
                 </div>
                 <div className="flex-grow-1">{children}</div>
@@ -16,4 +16,4 @@ function DashBoardLayout({ children }) {
     );
 }
 
-export default DashBoardLayout;
+export default DashboardLayout;
