@@ -1,24 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { URL_API_GET_CLASS } from "../services/common";
 
 const classListSlice = createSlice({
     name: "classList",
-    initialState: [
-        {
-            id: "01HHHDK6RH1AX4FBV7BV0NWDY0",
-            name: ".Net Core",
-            teacher_id: "01HHHDAR5E6J6XYXGT3KD40R32",
-        },
-        {
-            id: "01HHHDK6RKRHBMPPAK5Q7FQXVA",
-            name: "Python",
-            teacher_id: "01HHHDAR5KAM5JQ62HVCR796B0",
-        },
-        {
-            id: "01HHHDK6RQKBY5F95GA1ZGHPYM",
-            name: "ReactJS",
-            teacher_id: "01HHHDAR57VD5JFVKM72WYN0C7",
-        },
-    ]
+
+    initialState: {
+        status: "idle",
+        classList: []
+    },
+
+    reducers: {},
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchClassListThunkAction.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchClassListThunkAction.fulfilled, (state, action) => {
+                state.status = "idle";
+                state.classList = action.payload;
+            })
+    }
 });
+
+export const fetchClassListThunkAction = createAsyncThunk("classList/fetchClassListThunkAction", async () => {
+    let res = await fetch(URL_API_GET_CLASS);
+    let data = await res.json();
+    return data;
+})
 
 export default classListSlice;

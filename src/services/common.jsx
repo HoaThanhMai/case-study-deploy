@@ -1,26 +1,36 @@
 // Path to each Pages
-const path_home = "/";
-const path_login = "/login";
-const path_dashboard = "/dashboard";
-const path_dashboard_view_profile = "/dashboard/my-profile";
-const path_dashboard_class_list = "/dashboard/class-list";
-const path_dashboard_teacher_list = "/dashboard/teacher-list";
-const path_dashboard_student_list = "/dashboard/student-list";
+const PATH_HOME = "/";
+const PATH_LOGIN = "/login";
+const PATH_DASHBOARD = "/dashboard";
+const PATH_DASHBOARD_VIEW_PROFILE = "/dashboard/my-profile";
+const PATH_DASHBOARD_CLASS_LIST = "/dashboard/class-list";
+const PATH_DASHBOARD_TEACHER_LIST = "/dashboard/teacher-list";
+const PATH_DASHBOARD_STUDENT_LIST = "/dashboard/student-list";
 
 // API url prefix
-const api_member = "";
-const api_class = "";
-const api_class_members = "";
+const URL_API_GET_ADMIN =
+    "https://json-server-api-rj2309r1.vercel.app/member?role=admin";
+const URL_API_GET_MEMBER = "https://json-server-api-rj2309r1.vercel.app/member";
+const URL_API_GET_TEACHER =
+    "https://json-server-api-rj2309r1.vercel.app/member?role=teacher";
+const URL_API_GET_STUDENT =
+    "https://json-server-api-rj2309r1.vercel.app/member?role=student";
+const URL_API_GET_CLASS = "https://json-server-api-rj2309r1.vercel.app/class";
+const URL_API_GET_CLASS_MEMBER =
+    "https://json-server-api-rj2309r1.vercel.app/class_member";
 
 export {
-    path_home,
-    path_login,
-    path_dashboard,
-    path_dashboard_view_profile,
-    path_dashboard_class_list,
-    path_dashboard_teacher_list,
-    path_dashboard_student_list,
-    api_member,
-    api_class,
-    api_class_members,
+    PATH_HOME,
+    PATH_LOGIN,
+    PATH_DASHBOARD,
+    PATH_DASHBOARD_VIEW_PROFILE,
+    PATH_DASHBOARD_CLASS_LIST,
+    PATH_DASHBOARD_TEACHER_LIST,
+    PATH_DASHBOARD_STUDENT_LIST,
+    URL_API_GET_ADMIN,
+    URL_API_GET_MEMBER,
+    URL_API_GET_TEACHER,
+    URL_API_GET_STUDENT,
+    URL_API_GET_CLASS,
+    URL_API_GET_CLASS_MEMBER,
 };

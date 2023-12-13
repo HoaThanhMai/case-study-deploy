@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-    path_dashboard_view_profile,
-    path_home,
-    path_login,
+    PATH_DASHBOARD_VIEW_PROFILE,
+    PATH_HOME,
+    PATH_LOGIN,
 } from "../../services/common";
 import { FaSchool, FaUserCog } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
@@ -16,22 +16,22 @@ function NavBar() {
     return (
         <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
             <div style={{ minWidth: "180px" }}>
-                <Link to={path_home} className="logo d-flex align-items-end">
+                <Link to={PATH_HOME} className="logo d-flex align-items-end">
                     <FaSchool size={33} className="me-1" />
                     School Portal
                 </Link>
             </div>
             <div className="d-flex align-items-center">
-                {status ? (
+                {status === "logged" ? (
                     <Link
-                        to={path_dashboard_view_profile}
+                        to={PATH_DASHBOARD_VIEW_PROFILE}
                         className="logo d-flex align-items-end">
                         {user_inf.first_name} {user_inf.last_name}
                         <FaUserCog size={33} className="ms-1" />
                     </Link>
                 ) : (
                     <Link
-                        to={path_login}
+                        to={PATH_LOGIN}
                         className="logo d-flex align-items-end">
                         Login
                         <FiLogIn size={33} className="ms-1" />

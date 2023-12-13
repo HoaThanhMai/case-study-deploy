@@ -1,8 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMyProfileThunkAction } from "../../../slices/myProfileInfoSlice";
+import { URL_API_GET_MEMBER } from "../../../services/common";
 
 function ProfileCard(props) {
-    const loginInf = useSelector((state) => state.loginInfoReducer);
+    const loginInfo = useSelector((state) => state.loginInfoReducer);
+    const { status, user_inf } = loginInfo;
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let url = `${URL_API_GET_MEMBER}/${user_inf.id}`;
+        dispatch(fetchMyProfileThunkAction(url));
+    }, [dispatch]);
+
+    const myProfile = useSelector((state) => state.myProfileReducer);
 
     const {
         id,
@@ -15,9 +27,13 @@ function ProfileCard(props) {
         mobile,
         address,
         gender,
-    } = loginInf.user_inf;
+    } = myProfile.profile.myProfile;
 
-    return (
+    const isLoading = myProfile.status;
+
+    return isLoading === "loading" ? (
+        <p> Loadiing....</p>
+    ) : (
         <div className="card mb-3 border-0">
             <div className="row g-0">
                 <div className="col-md-4 d-flex align-items-center justify-content-center">

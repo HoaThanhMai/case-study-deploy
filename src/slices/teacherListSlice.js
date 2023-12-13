@@ -1,74 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { URL_API_GET_TEACHER } from "../services/common";
 
 const teacherListSlice = createSlice({
     name: "teacherList",
-    initialState: [
-        {
-            id: "01HHHDAR57VD5JFVKM72WYN0C7",
-            first_name: "Gavin",
-            last_name: "Eminson",
-            dob: "1/14/2023",
-            gender: "female",
-            mobile: "8757704111",
-            address: "65863 Quincy Circle",
-            avatar: "https://robohash.org/quisetvero.png?size=100x100&set=set1",
-            role: "teacher",
-            email: "geminson1@blogger.com",
-            password: "nX4_)GzpM",
-        },
-        {
-            id: "01HHHDAR5C84MYKP0YVEDT9HH3",
-            first_name: "Bayard",
-            last_name: "Fennelly",
-            dob: "12/17/2022",
-            gender: "male",
-            mobile: "3821748462",
-            address: "6 Arkansas Plaza",
-            avatar: "https://robohash.org/ethictemporibus.png?size=100x100&set=set1",
-            role: "teacher",
-            email: "bfennelly3@bloomberg.com",
-            password: "wE6~wVf26c|3F",
-        },
-        {
-            id: "01HHHDAR5E6J6XYXGT3KD40R32",
-            first_name: "Orsa",
-            last_name: "Pinnere",
-            dob: "6/18/2023",
-            gender: "male",
-            mobile: "1043229951",
-            address: "0 Eastwood Park",
-            avatar: "https://robohash.org/aimpeditharum.png?size=100x100&set=set1",
-            role: "teacher",
-            email: "opinnere4@netlog.com",
-            password: "oX3**E8z>,~YYHf",
-        },
-        {
-            id: "01HHHDAR5HPKQNCBAP9CVTQC4B",
-            first_name: "Nathalia",
-            last_name: "Greensall",
-            dob: "2/7/2023",
-            gender: "male",
-            mobile: "2251606926",
-            address: "9 Lukken Alley",
-            avatar: "https://robohash.org/optiosuscipitillum.png?size=100x100&set=set1",
-            role: "teacher",
-            email: "ngreensall5@ed.gov",
-            password: 'gE1">&/7Z',
-        },
-        {
-            id: "01HHHDAR5KAM5JQ62HVCR796B0",
-            first_name: "Dorena",
-            last_name: "Niccols",
-            dob: "8/6/2023",
-            gender: "female",
-            mobile: "8278561717",
-            address: "103 Toban Lane",
-            avatar: "https://robohash.org/doloribusdolorummolestiae.png?size=100x100&set=set1",
-            role: "teacher",
-            email: "dniccols6@godaddy.com",
-            password: "tC7<YVp/n(@Fq8<",
-        },
-    ]
+    initialState: {
+        status: "idle",
+        teachers: []
+    },
+    reducers: {},
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchTeacherListThunkAction.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(fetchTeacherListThunkAction.fulfilled, (state, action) => {
+                state.status = "idle";
+                state.teachers = action.payload;
+            })
+    }
 });
+
+export const fetchTeacherListThunkAction = createAsyncThunk("teacherList/fetchTeacherListThunkAction", async () => {
+    let res = await fetch(URL_API_GET_TEACHER);
+    let data = await res.json();
+    return data;
+})
 
 export default teacherListSlice;

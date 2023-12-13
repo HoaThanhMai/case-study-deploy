@@ -1,24 +1,62 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const loginInfoSlice = createSlice({
     name: "loginInfo",
     initialState: {
-        status: true,
+        status: "idle",
         user_inf: {
-            id: "01HHHDAR5PET8NZ2REXTE6Z17E",
-            first_name: "Brittni",
-            last_name: "Ferneley",
-            dob: "7/4/2023",
-            gender: "female",
-            mobile: "6496664798",
-            address: "480 Marquette Terrace",
-            avatar: "https://robohash.org/utquaerem.png?size=100x100&set=set1",
-            role: "student",
-            email: "bferneley7@drupal.org",
-            password: "mF8?9)oz",
+            id: "",
+            first_name: "",
+            last_name: "",
+            dob: "",
+            gender: "",
+            mobile: "",
+            address: "",
+            avatar: "",
+            role: "",
+            email: "",
+            password: ""
         }
     },
-    reducer: {}
+    reducers: {
+
+        setEmail: (state, action) => {
+            state.user_inf.email = action.payload
+        },
+
+        setPasswd: (state, action) => {
+            state.user_inf.password = action.payload
+        },
+    },
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchUserInfoThunkAction.pending, (state, action) => {
+                state.status = "logging";
+            })
+            .addCase(fetchUserInfoThunkAction.fulfilled, (state, action) => {
+                console.log(action.payload);
+                if (action.payload.length !== 1) {
+                    state.status = "emailfail";
+                }
+                else {
+                    let user = action.payload[0];
+                    if (user.password !== state.user_inf.password) {
+                        state.status = "passwdfail";
+                    }
+                    else {
+                        state.status = "logged";
+                        state.user_inf = user;
+                    }
+                }
+            })
+    }
 });
+
+export const fetchUserInfoThunkAction = createAsyncThunk("loginInfo/fetchUserInfoThunkAction", async (url) => {
+    let res = await fetch(url);
+    let data = await res.json();
+    return data;
+})
 
 export default loginInfoSlice;

@@ -1,14 +1,28 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchClassListThunkAction } from "../../slices/classListSlice";
+import { fetchTeacherListThunkAction } from "../../slices/teacherListSlice";
+import { fetchStudentListThunkAction } from "../../slices/studentListSlice";
 
 function DataTable(props) {
-    const classlist = useSelector((state) => state.classListReducer);
-
-    const teacherList = useSelector((state) => state.teacherListReducer);
-
-    const studentList = useSelector((state) => state.studentListReducer);
-
     let type = props.type;
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchClassListThunkAction());
+        dispatch(fetchTeacherListThunkAction());
+        dispatch(fetchStudentListThunkAction());
+    }, [dispatch]);
+
+    const classList = useSelector((state) => state.classListReducer.classList);
+
+    const teacherList = useSelector(
+        (state) => state.teacherListReducer.teachers
+    );
+
+    const studentList = useSelector(
+        (state) => state.studentListReducer.students
+    );
 
     const getTeacherName = (teacherId) => {
         const teacher = teacherList.find((teacher) => teacher.id === teacherId);
@@ -75,7 +89,7 @@ function DataTable(props) {
     const createTableClassBody = () => {
         return (
             <tbody>
-                {classlist.map((classItem) => (
+                {classList.map((classItem) => (
                     <tr key={classItem.id}>
                         <td>{classItem.id}</td>
                         <td>{classItem.name}</td>

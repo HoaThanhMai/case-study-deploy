@@ -1,8 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import myProfileInfoSlice, {
+    fetchMyProfileThunkAction,
+    setMyProfileThunkAction,
+} from "../../../slices/myProfileInfoSlice";
+import { URL_API_GET_MEMBER } from "../../../services/common";
 
 function ProfileEditForm(props) {
-    const loginInf = useSelector((state) => state.loginInfoReducer);
+    const loginInfo = useSelector((state) => state.loginInfoReducer);
+    const { status, user_inf } = loginInfo;
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let url = `${URL_API_GET_MEMBER}/${user_inf.id}`;
+        dispatch(fetchMyProfileThunkAction(url));
+    }, [dispatch]);
+
+    const myProfile = useSelector((state) => state.myProfileReducer);
 
     const {
         avatar,
@@ -15,9 +30,50 @@ function ProfileEditForm(props) {
         address,
         gender,
         password,
-    } = loginInf.user_inf;
+    } = myProfile.profile.myProfile;
 
-    return (
+    const isLoading = myProfile.status;
+    console.log(myProfile.profile.editProfile);
+
+    const handleFirstNameInputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editFirstName(e.target.value));
+    };
+
+    const handleLastNameInputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editLastName(e.target.value));
+    };
+
+    const handleDoBInputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editDateOfBirth(e.target.value));
+    };
+
+    const handleGenderIputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editGender(e.target.value));
+    };
+
+    const handleMobileInputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editMobile(e.target.value));
+    };
+
+    const handleAddressInputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editAddress(e.target.value));
+    };
+
+    const handlePasswdInputed = (e) => {
+        dispatch(myProfileInfoSlice.actions.editPasswd(e.target.value));
+    };
+
+    const handleUpdateProfile = () => {
+        let url = `${URL_API_GET_MEMBER}/${user_inf.id}`;
+        console.log({ ...myProfile.profile.editProfile });
+        dispatch(
+            setMyProfileThunkAction(url, { ...myProfile.profile.editProfile })
+        );
+    };
+
+    return isLoading === "loading" ? (
+        <p> Loadiing....</p>
+    ) : (
         <div className="d-flex align-items-center justify-content-center row g-0">
             <form
                 style={{ maxWidth: "400px", width: "100%" }}
@@ -30,6 +86,7 @@ function ProfileEditForm(props) {
                             className="form-control"
                             id="in_first_name_edit"
                             placeholder={first_name}
+                            onInput={handleFirstNameInputed}
                         />
                     </div>
                     <div className="flex-grow-1">
@@ -39,6 +96,7 @@ function ProfileEditForm(props) {
                             className="form-control"
                             id="in_last_name_edit"
                             placeholder={last_name}
+                            onInput={handleLastNameInputed}
                         />
                     </div>
                 </div>
@@ -49,6 +107,7 @@ function ProfileEditForm(props) {
                         className="form-control"
                         id="in_dob_edit"
                         placeholder={dob}
+                        onInput={handleDoBInputed}
                     />
                 </div>
                 <div className="form-group">
@@ -58,6 +117,7 @@ function ProfileEditForm(props) {
                         className="form-control"
                         id="in_gender_edit"
                         placeholder={gender}
+                        onInput={handleGenderIputed}
                     />
                 </div>
                 <div className="form-group">
@@ -67,6 +127,7 @@ function ProfileEditForm(props) {
                         className="form-control"
                         id="in_mobile_edit"
                         placeholder={mobile}
+                        onInput={handleMobileInputed}
                     />
                 </div>
                 <div className="form-group">
@@ -76,6 +137,7 @@ function ProfileEditForm(props) {
                         className="form-control"
                         id="in_address_edit"
                         placeholder={address}
+                        onInput={handleAddressInputed}
                     />
                 </div>
                 <div className="form-group">
@@ -85,14 +147,15 @@ function ProfileEditForm(props) {
                         className="form-control"
                         id="in_password_edit"
                         placeholder={password}
+                        onInput={handlePasswdInputed}
                     />
                 </div>
                 <div className="form-group mt-3">
-                    <button type="submit" className="btn btn-primary mx-2">
-                        Save
-                    </button>
-                    <button type="button" className="btn btn-secondary mx-2">
-                        Cancel
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleUpdateProfile}>
+                        Update
                     </button>
                 </div>
             </form>
