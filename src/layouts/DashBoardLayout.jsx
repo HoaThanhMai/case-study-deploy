@@ -7,7 +7,7 @@ function DashboardLayout({ children }) {
         <div className="container">
             <NavBar />
             <div className="d-flex py-2">
-                <div style={{ minWidth: "180px" }}>
+                <div style={{ minWidth: "130px" }} className="border-end">
                     <Menu />
                 </div>
                 <div className="flex-grow-1">{children}</div>

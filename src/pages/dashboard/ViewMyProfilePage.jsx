@@ -3,7 +3,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import ProfileCard from "../../components/Dashboard/ViewProfile/ProfileCard";
 import ProfileEditForm from "../../components/Dashboard/ViewProfile/ProfileEditForm";
 
-function ViewProfilePage() {
+function ViewMyProfilePage() {
     const loading = false;
 
     return (
@@ -23,4 +23,4 @@ function ViewProfilePage() {
     );
 }
 
-export default ViewProfilePage;
+export default ViewMyProfilePage;

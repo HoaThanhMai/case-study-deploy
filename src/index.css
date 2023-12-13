@@ -15,7 +15,7 @@ code {
 /* css for logo class at NavBar */
 .logo {
     text-decoration: none;
-    color: #212529;
+    color: black;
 }
 
 /* css for menu class at Dashboard Menu */
@@ -23,4 +23,9 @@ code {
     margin-bottom: 1px;
     padding: 7px 2px;
     text-decoration: none;
+    color: black;
+}
+
+.active {
+    background-color: rgba(117, 186, 255, 0.5);
 }

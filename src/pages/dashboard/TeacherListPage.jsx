@@ -1,10 +1,13 @@
 import React from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
+import TeacherList from "../../components/Dashboard/TeacherList/TeacherList";
 
 function TeacherListPage() {
     return (
         <DashboardLayout>
-            <div className="container-fluid d-flex"></div>
+            <div className="container d-flex">
+                <TeacherList />
+            </div>
         </DashboardLayout>
     );
 }

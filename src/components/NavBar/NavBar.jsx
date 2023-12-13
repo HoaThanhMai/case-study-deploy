@@ -5,25 +5,36 @@ import {
     path_home,
     path_login,
 } from "../../services/common";
-
-let isLogin = false;
+import { FaSchool, FaUserCog } from "react-icons/fa";
+import { FiLogIn } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 function NavBar() {
+    const loginInfo = useSelector((state) => state.loginInfoReducer);
+    const { status, user_inf } = loginInfo;
+
     return (
-        <div className="container-fluid d-flex align-items-center border-bottom py-2">
-            <div className="container">
-                <Link to={path_home} className="logo">
-                    <i className="fa-solid fa-school fa-xl"></i> School Portal
+        <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
+            <div style={{ minWidth: "180px" }}>
+                <Link to={path_home} className="logo d-flex align-items-end">
+                    <FaSchool size={33} className="me-1" />
+                    School Portal
                 </Link>
             </div>
-            <div className="d-flex">
-                {isLogin ? (
-                    <Link to={path_dashboard_view_profile} className="logo">
-                        <i className="fa-solid fa-circle-user fa-xl"></i>
+            <div className="d-flex align-items-center">
+                {status ? (
+                    <Link
+                        to={path_dashboard_view_profile}
+                        className="logo d-flex align-items-end">
+                        {user_inf.first_name} {user_inf.last_name}
+                        <FaUserCog size={33} className="ms-1" />
                     </Link>
                 ) : (
-                    <Link to={path_login} className="icon">
-                        <i className="fa-solid fa-right-to-bracket fa-xl"></i>
+                    <Link
+                        to={path_login}
+                        className="logo d-flex align-items-end">
+                        Login
+                        <FiLogIn size={33} className="ms-1" />
                     </Link>
                 )}
             </div>

@@ -1,17 +1,11 @@
 import React, { useEffect, useReducer } from "react";
-import { initState, reducer } from "../../reducer/reducer";
-import { inputEmail, inputPassword } from "../../reducer/action";
 
 function LoginForm(props) {
-    const [state, dispatch] = useReducer(reducer, initState);
-
-    console.log(state);
-
     const handleInputEmail = (e) => {
-        dispatch(inputEmail(e.target.value));
+        // dispatch(inputEmail(e.target.value));
     };
     const handleInputPassword = (e) => {
-        dispatch(inputPassword(e.target.value));
+        // dispatch(inputPassword(e.target.value));
     };
 
     const handleClickSubmit = () => {
