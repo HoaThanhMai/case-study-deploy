@@ -7,7 +7,6 @@ import ViewProfilePage from './pages/dashboard/ViewProfilePage';
 import ClassListPage from './pages/dashboard/ClassListPage';
 import TeacherListPage from './pages/dashboard/TeacherListPage';
 import StudentListPage from './pages/dashboard/StudentListPage';
-// import DashboardPage from './pages/dashboard/DashboardPage';
 
 function App() {
     return (

@@ -13,7 +13,7 @@ function NavBar() {
         <div className="container-fluid d-flex align-items-center border-bottom py-2">
             <div className="container">
                 <Link to={path_home} className="logo">
-                    <i className="fa-solid fa-school fa-xl"></i> Home
+                    <i className="fa-solid fa-school fa-xl"></i> School Portal
                 </Link>
             </div>
             <div className="d-flex">

@@ -1,27 +1,49 @@
 import React from "react";
 
 function ProfileCard(props) {
+    // const [id, avatar, name, role, dob, email, mobile, address] = props;
+    const id = "01HHHDAR52S3WJJR5JPSCRZBQB";
+    const avatar =
+        "https://robohash.org/eumfugitvoluptatem.png?size=100x100&set=set1";
+    const first_name = "Olivie";
+    const last_name = "Coulston";
+    const role = "student";
+    const dob = "12/9/2023";
+    const email = "ocoulston0@squarespace.com";
+    const mobile = "3231786487";
+    const address = "9905 Rutledge Parkway";
+    const gender = "female";
+
     return (
-        <div class="card mb-3 border-0">
-            <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <div className="card mb-3 border-0">
+            <div className="row g-0">
+                <div className="col-md-4 d-flex align-items-center justify-content-center">
                     <img
-                        src="https://cdn-icons-png.flaticon.com/512/5556/5556468.png"
-                        class="img-fluid rounded-start"
+                        // src="https://cdn-icons-png.flaticon.com/512/5556/5556468.png"
+                        src={avatar}
+                        className="img-fluid rounded-start"
                         alt="..."
                     />
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">User Name</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ID: </li>
-                            <li class="list-group-item">Name: </li>
-                            <li class="list-group-item">Email: </li>
-                            <li class="list-group-item">Mobile: </li>
-                            <li class="list-group-item">Adress: </li>
-                            <li class="list-group-item">CPA: </li>
-                            <li class="list-group-item">Status: </li>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            {first_name} {last_name}
+                        </h5>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">ID: {id}</li>
+                            <li className="list-group-item">DoB: {dob}</li>
+                            <li className="list-group-item">
+                                Gender: {gender}
+                            </li>
+                            <li className="list-group-item">Email: {email}</li>
+                            <li className="list-group-item">
+                                Mobile: {mobile}
+                            </li>
+                            <li className="list-group-item">
+                                Adress: {address}
+                            </li>
+                            <li className="list-group-item">Role: {role}</li>
                         </ul>
                     </div>
                 </div>

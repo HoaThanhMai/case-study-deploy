@@ -20,19 +20,19 @@ function Menu() {
                 <NavLink
                     to={path_dashboard_class_list}
                     className="menu d-flex align-items-center">
-                    <i class="fa-solid fa-landmark fa-sm"></i>
+                    <i className="fa-solid fa-landmark fa-sm"></i>
                     Class list
                 </NavLink>
                 <NavLink
                     to={path_dashboard_class_list}
                     className="menu d-flex align-items-center">
-                    <i class="fa-solid fa-person-chalkboard fa-sm"></i>
+                    <i className="fa-solid fa-person-chalkboard fa-sm"></i>
                     Teacher list
                 </NavLink>
                 <NavLink
                     to={path_dashboard_student_list}
                     className="menu d-flex align-items-center">
-                    <i class="fa-solid fa-chalkboard-user fa-sm"></i>
+                    <i className="fa-solid fa-chalkboard-user fa-sm"></i>
                     Student list
                 </NavLink>
             </div>
