@@ -68,7 +68,7 @@ function ProfileEditForm(props) {
                     <div className="row g-0">
                         <div className="col-md-3">
                             <div className="mb-3 text-center">
-                                <img src={avatar} alt="" style={{ borderRadius: "50%" }} ></img>
+                                <img src={avatar} alt="" style={{ maxWidth: "400px", maxHeight: "200px" }} ></img>
                             </div>
                             <div className="col-md-9">
                                 <div className="d-flex flex-column align-items-start">
@@ -261,8 +261,8 @@ function ProfileEditForm(props) {
                         Update
                     </button>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 }
 
