@@ -39,12 +39,13 @@ const classListSlice = createSlice({
             })
             .addCase(addClassThunkAction.fulfilled, (state, action) => {
                 state.classlist.unshift(action.payload);
+                state.status = "idle";
             })
             .addCase(deleteClassThunkAction.pending, (state, action) => {
                 state.status = "loading";
             })
             .addCase(deleteClassThunkAction.fulfilled, (state, action) => {
-                console.log("khoitv4");
+                state.status = "idle";
                 state.classlist = state.classlist.filter((p) => p.id !== action.payload?.id)
             });
     }
