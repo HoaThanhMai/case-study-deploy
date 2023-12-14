@@ -5,7 +5,7 @@ import * as yup from "yup"
 import { useDispatch, useSelector } from "react-redux";
 import useFetchResource from "../../../custom-hooks/useFetchResource";
 import { URL_API_GET_CLASS, URL_API_GET_TEACHER } from "../../../services/common";
-import { addClassThunkAction, updateClassThunkAction } from "../../../slices/classSlice";
+import { addClassThunkAction, updateClassThunkAction } from "../../../slices/classListSlice";
 
 const schema = yup.object({
     name: yup.string().required(),

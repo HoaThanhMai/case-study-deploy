@@ -1,29 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import useFetchResource from "../../custom-hooks/useFetchResource";
-import {
-    URL_API_GET_CLASS,
-    URL_API_GET_STUDENT,
-    URL_API_GET_TEACHER,
-} from "../../services/common";
+import { useDispatch, useSelector } from "react-redux";
 import dataTableSlice from "../../slices/dataTableSlice";
+import { fetchClassListThunkAction } from "../../slices/classListSlice";
+import { fetchStudentListThunkAction } from "../../slices/studentListSlice";
+import { fetchTeacherListThunkAction } from "../../slices/teacherListSlice";
 
 
 function DataTable(props) {
 
     const dispatch = useDispatch();
-    useEffect(() => { }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchClassListThunkAction());
+        dispatch(fetchStudentListThunkAction());
+        dispatch(fetchTeacherListThunkAction());
+    }, [dispatch]);
+
+
     let type = props.type;
     dispatch(dataTableSlice.actions.setType(type))
 
-    const classList = useFetchResource(URL_API_GET_CLASS);
+    const classList = useSelector((state) => state.classListReducer.classlist)
+    console.log(classList);
 
-    const teacherList = useFetchResource(URL_API_GET_TEACHER);
+    const teacherList = useSelector((state) => state.teacherListReducer.teacherlist)
+    console.log(teacherList);
 
-    const studentList = useFetchResource(URL_API_GET_STUDENT);
+    const studentList = useSelector((state) => state.studentListReducer.studentlist)
+    console.log(studentList);
 
     const getTeacherName = (teacherId) => {
-        const teacher = teacherList.find((teacher) => teacher.id === teacherId);
+        const teacher = teacherList.find(teacher => teacher.id === teacherId);
         return teacher
             ? `${teacher.first_name} ${teacher.last_name}`
             : "Unknown Teacher";
