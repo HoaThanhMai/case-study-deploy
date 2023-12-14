@@ -5,7 +5,7 @@ import * as yup from "yup"
 import { useDispatch, useSelector } from "react-redux";
 import useFetchResource from "../../../custom-hooks/useFetchResource";
 import { URL_API_GET_CLASS, URL_API_GET_TEACHER } from "../../../services/common";
-import { addClassThunkAction, updateClassThunkAction } from "../../../slices/classListSlice";
+import { addClassThunkAction, deleteClassThunkAction, updateClassThunkAction } from "../../../slices/classListSlice";
 
 const schema = yup.object({
     name: yup.string().required(),
@@ -83,13 +83,21 @@ function ClassHeader() {
         dispatch(updateClassThunkAction(cls));
     }
 
+    const handleDeleteClassClick = (data) => {
+        let cls = {
+            ...curClass,
+        };
+        dispatch(deleteClassThunkAction(cls));
+    }
+
     return (
         <div>
             <div className="d-flex align-items-center justify-content-between py-3 border-bottom">
                 <h5>{isEditing ? "Edit Class Info" : isAddNew ? "Update Class Info" : "Show Class Info"}</h5>
                 <div>
-                    <button className="btn btn-primary me-3" onClick={handleUpdateButtonClick}>Edit</button>
-                    <button className="btn btn-secondary" onClick={handleAddNewButtonClick}>Add</button>
+                    <button className="btn btn-success me-3" onClick={handleUpdateButtonClick}>Edit</button>
+                    <button className="btn btn-warning me-3" onClick={handleAddNewButtonClick}>Add</button>
+                    <button className="btn btn-danger" onClick={handleDeleteClassClick}>Delete</button>
                 </div>
             </div>
             {

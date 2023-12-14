@@ -39,6 +39,13 @@ const classListSlice = createSlice({
             })
             .addCase(addClassThunkAction.fulfilled, (state, action) => {
                 state.classlist.unshift(action.payload);
+            })
+            .addCase(deleteClassThunkAction.pending, (state, action) => {
+                state.status = "loading";
+            })
+            .addCase(deleteClassThunkAction.fulfilled, (state, action) => {
+                console.log("khoitv4");
+                state.classlist = state.classlist.filter((p) => p.id !== action.payload?.id)
             });
     }
 });
@@ -73,6 +80,14 @@ const addClassThunkAction = createAsyncThunk("classlist/addClassThunkAction", as
     return data;
 })
 
-export { fetchClassListThunkAction, updateClassThunkAction, addClassThunkAction }
+const deleteClassThunkAction = createAsyncThunk("classlist/deleteClassThunkAction", async (cls) => {
+    let res = await fetch(`${URL_API_GET_CLASS}/${cls?.id}`, {
+        method: "DELETE"
+    });
+    await res.json()
+    return cls
+})
+
+export { fetchClassListThunkAction, updateClassThunkAction, addClassThunkAction, deleteClassThunkAction }
 
 export default classListSlice;
