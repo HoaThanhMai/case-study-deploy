@@ -1,12 +1,9 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import loginInfoSlice, {
-    fetchUserInfoThunkAction,
+    loginWithEmailPasswdThunkAction,
 } from "../../slices/loginInfoSlice";
-import {
-    PATH_DASHBOARD_VIEW_PROFILE,
-    URL_API_GET_MEMBER,
-} from "../../services/common";
+import { PATH_DASHBOARD_VIEW_PROFILE } from "../../services/common";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -15,16 +12,32 @@ function LoginForm(props) {
     const navigate = useNavigate();
 
     const loginInfo = useSelector((state) => state.loginInfoReducer);
-    const { status, user_inf } = loginInfo;
+    const { loginState, user_inf } = loginInfo;
 
     useEffect(() => {
-        if (status === "logged") {
-            toast.success(`Login success!`, {
-                autoClose: 1000,
-            });
-            navigate(PATH_DASHBOARD_VIEW_PROFILE);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        switch (loginState) {
+            case "logged":
+                toast.success(`Login success!`, {
+                    autoClose: 1000,
+                });
+                navigate(PATH_DASHBOARD_VIEW_PROFILE);
+                break;
+            case "emailfail":
+                toast.error(`Email ${user_inf.email} not match!`, {
+                    autoClose: 1000,
+                });
+                break;
+            case "passwdfail":
+                toast.error(`Password not match!`, {
+                    autoClose: 1000,
+                });
+                break;
+            default:
+                break;
         }
-    }, [status, navigate]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loginState, navigate]);
 
     const handleInputEmail = (e) => {
         dispatch(loginInfoSlice.actions.setEmail(e.target.value));
@@ -35,11 +48,10 @@ function LoginForm(props) {
     };
 
     const handleClickSubmit = () => {
-        let url = `${URL_API_GET_MEMBER}?email=${user_inf.email}`;
-        dispatch(fetchUserInfoThunkAction(url));
+        dispatch(loginWithEmailPasswdThunkAction(user_inf));
     };
 
-    return status !== "logged" ? (
+    return loginState !== "logged" ? (
         <form style={{ maxWidth: "400px", width: "100%" }}>
             <div className="form-group">
                 <label htmlFor="in_email">Email address</label>

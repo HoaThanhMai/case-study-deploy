@@ -7,14 +7,14 @@ import { PATH_HOME } from "../services/common";
 
 function DashboardLayout({ children }) {
     const loginInfo = useSelector((state) => state.loginInfoReducer);
-    const { status } = loginInfo;
+    const { loginState } = loginInfo;
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (status !== "logged") {
+        if (loginState !== "logged") {
             navigate(PATH_HOME);
         }
-    }, [status, navigate]);
+    }, [loginState, navigate]);
 
     return (
         <div className="container">

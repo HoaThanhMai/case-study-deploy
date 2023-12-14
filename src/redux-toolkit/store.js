@@ -1,17 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import classListSlice from "../slices/classListSlice";
-import teacherListSlice from "../slices/teacherListSlice";
-import studentListSlice from "../slices/studentListSlice";
 import loginInfoSlice from "../slices/loginInfoSlice";
-import myProfileInfoSlice from "../slices/myProfileInfoSlice";
+import classFilterSlice from '../slices/classFilterSlice';
+import teacherFilterSlice from "../slices/teacherFilterSlice";
+import studentFilterSlice from "../slices/studentFilterSlice";
+import classSlice from "../slices/classSlice";
+import userSlice from "../slices/userSlice";
+import dataTableSlice from "../slices/dataTableSlice";
 
 const store = configureStore({
     reducer: {
-        classListReducer: classListSlice.reducer,
-        teacherListReducer: teacherListSlice.reducer,
-        studentListReducer: studentListSlice.reducer,
         loginInfoReducer: loginInfoSlice.reducer,
-        myProfileReducer: myProfileInfoSlice.reducer,
+        classFilter: classFilterSlice.reducer,
+        teacherFilter: teacherFilterSlice.reducer,
+        studentFilter: studentFilterSlice.reducer,
+        classReducer: classSlice.reducer,
+        userReducer: userSlice.reducer,
+        dataTableReducer: dataTableSlice.reducer,
     }
 });
 

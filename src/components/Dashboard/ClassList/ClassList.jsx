@@ -1,12 +1,11 @@
 import React from "react";
 import DataTable from "../DataTable";
+import ClassHeader from "./ClassHeader";
 
 function ClassList() {
     return (
         <div className="container">
-            <div style={{ minHeight: "70px" }}>
-                <p>Class List Info</p>
-            </div>
+            <ClassHeader />
             <div className="flex-grow-1">
                 <DataTable type="class"></DataTable>
             </div>

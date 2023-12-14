@@ -1,28 +1,26 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchClassListThunkAction } from "../../slices/classListSlice";
-import { fetchTeacherListThunkAction } from "../../slices/teacherListSlice";
-import { fetchStudentListThunkAction } from "../../slices/studentListSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import useFetchResource from "../../custom-hooks/useFetchResource";
+import {
+    URL_API_GET_CLASS,
+    URL_API_GET_STUDENT,
+    URL_API_GET_TEACHER,
+} from "../../services/common";
+import dataTableSlice from "../../slices/dataTableSlice";
+
 
 function DataTable(props) {
-    let type = props.type;
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchClassListThunkAction());
-        dispatch(fetchTeacherListThunkAction());
-        dispatch(fetchStudentListThunkAction());
-    }, [dispatch]);
+    useEffect(() => { }, [dispatch]);
+    let type = props.type;
+    dispatch(dataTableSlice.actions.setType(type))
 
-    const classList = useSelector((state) => state.classListReducer.classList);
+    const classList = useFetchResource(URL_API_GET_CLASS);
 
-    const teacherList = useSelector(
-        (state) => state.teacherListReducer.teachers
-    );
+    const teacherList = useFetchResource(URL_API_GET_TEACHER);
 
-    const studentList = useSelector(
-        (state) => state.studentListReducer.students
-    );
+    const studentList = useFetchResource(URL_API_GET_STUDENT);
 
     const getTeacherName = (teacherId) => {
         const teacher = teacherList.find((teacher) => teacher.id === teacherId);
@@ -31,8 +29,34 @@ function DataTable(props) {
             : "Unknown Teacher";
     };
 
+    const getObjectbyId = (arr, id) => {
+        return arr.find(item => item.id === id);
+    }
+
+    const [selectedKey, setSelectedKey] = useState(null);
+
+    const handleRadioChange = (key) => {
+        setSelectedKey(key);
+        switch (type) {
+            case "class":
+                let cls = getObjectbyId(classList, key);
+                dispatch(dataTableSlice.actions.setSelectedClass(cls));
+                break;
+            case "teacher":
+                let teacher = getObjectbyId(teacherList, key);
+                dispatch(dataTableSlice.actions.setSelectedTeacher(teacher));
+                break;
+            case "student":
+                let student = getObjectbyId(studentList, key);
+                dispatch(dataTableSlice.actions.setSelectedStudent(student));
+                break;
+            default:
+                break;
+        }
+    };
+
     const createTableClassHeader = () => {
-        const headers = ["Class ID", "Name", "Form Teacher"];
+        const headers = ["Name", "Form Teacher", "#"];
         return (
             <thead className="table-dark">
                 <tr>
@@ -46,13 +70,13 @@ function DataTable(props) {
 
     const createTableTeacherHeader = () => {
         const headers = [
-            "Teacher ID",
             "Name",
             "Date of Birth",
             "Gender",
             "Mobile",
             "Email",
             "Address",
+            "#"
         ];
         return (
             <thead className="table-dark">
@@ -67,13 +91,13 @@ function DataTable(props) {
 
     const createTableStudentHeader = () => {
         const headers = [
-            "Student ID",
             "Name",
             "Date of Birth",
             "Gender",
             "Mobile",
             "Email",
             "Address",
+            "#"
         ];
         return (
             <thead className="table-dark">
@@ -89,11 +113,21 @@ function DataTable(props) {
     const createTableClassBody = () => {
         return (
             <tbody>
-                {classList.map((classItem) => (
+                {classList?.map((classItem, index) => (
                     <tr key={classItem.id}>
-                        <td>{classItem.id}</td>
                         <td>{classItem.name}</td>
                         <td>{getTeacherName(classItem.teacher_id)}</td>
+                        <td>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    value={classItem.id}
+                                    checked={selectedKey === classItem.id}
+                                    onChange={() => handleRadioChange(classItem.id)}
+                                />
+                            </div>
+                        </td>
                     </tr>
                 ))}
             </tbody>
@@ -103,9 +137,8 @@ function DataTable(props) {
     const createTableTeacherBody = () => {
         return (
             <tbody>
-                {teacherList.map((teacherItem) => (
+                {teacherList?.map((teacherItem) => (
                     <tr key={teacherItem.id}>
-                        <td>{teacherItem.id}</td>
                         <td>
                             {teacherItem.first_name} {teacherItem.last_name}
                         </td>
@@ -114,6 +147,17 @@ function DataTable(props) {
                         <td>{teacherItem.mobile}</td>
                         <td>{teacherItem.email}</td>
                         <td>{teacherItem.address}</td>
+                        <td>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    value={teacherItem.id}
+                                    checked={selectedKey === teacherItem.id}
+                                    onChange={() => handleRadioChange(teacherItem.id)}
+                                />
+                            </div>
+                        </td>
                     </tr>
                 ))}
             </tbody>
@@ -123,9 +167,8 @@ function DataTable(props) {
     const createTableStudentBody = () => {
         return (
             <tbody>
-                {studentList.map((studentItem) => (
+                {studentList?.map((studentItem) => (
                     <tr key={studentItem.id}>
-                        <td>{studentItem.id}</td>
                         <td>
                             {studentItem.first_name} {studentItem.last_name}
                         </td>
@@ -134,6 +177,17 @@ function DataTable(props) {
                         <td>{studentItem.mobile}</td>
                         <td>{studentItem.email}</td>
                         <td>{studentItem.address}</td>
+                        <td>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    value={studentItem.id}
+                                    checked={selectedKey === studentItem.id}
+                                    onChange={() => handleRadioChange(studentItem.id)}
+                                />
+                            </div>
+                        </td>
                     </tr>
                 ))}
             </tbody>
