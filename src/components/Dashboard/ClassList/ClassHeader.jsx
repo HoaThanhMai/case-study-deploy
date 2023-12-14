@@ -84,8 +84,11 @@ function ClassHeader() {
     }
 
     const handleDeleteClassClick = (data) => {
+        const teacher = JSON.parse(data.teacher)
         let cls = {
             ...curClass,
+            name: data.name,
+            teacher_id: teacher.id
         };
         dispatch(deleteClassThunkAction(cls));
     }

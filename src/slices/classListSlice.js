@@ -85,7 +85,7 @@ const deleteClassThunkAction = createAsyncThunk("classlist/deleteClassThunkActio
     let res = await fetch(`${URL_API_GET_CLASS}/${cls?.id}`, {
         method: "DELETE"
     });
-    await res.json()
+    let result = await res.json()
     return cls
 })
 
